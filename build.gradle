@@ -25,6 +25,7 @@ allprojects {
 // 子项目设置
 subprojects {
     apply plugin: 'war'
+    apply plugin: 'org.akhikhl.gretty'
 
     // 我们使用slf4j&logback，移除commons-logging
     configurations {
