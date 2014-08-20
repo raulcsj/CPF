@@ -19,6 +19,7 @@ allprojects {
 
     sourceCompatibility = JAVA_VERSION
     targetCompatibility = JAVA_VERSION
+    [compileJava, compileTestJava]*.options*.encoding = 'UTF-8'
 
     repositories {
         jcenter()
@@ -48,7 +49,6 @@ subprojects {
                 "org.springframework:spring-test:$spring"
     }
 
-    tasks.withType(Compile) { options.encoding = "UTF-8" }
 }
 
 // 整个项目的核心配置，基本上包含了所有的依赖，以及spring（包括mvc）和mybatis的配置
