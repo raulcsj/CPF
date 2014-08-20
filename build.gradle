@@ -1,76 +1,70 @@
 // 添加jetty7`8`9, tomcat7`8 支持
 buildscript {
-	repositories {
-		jcenter()
-	}
+    repositories { jcenter() }
 
-	dependencies {
-		classpath 'org.akhikhl.gretty:gretty:+'
-	}
+    dependencies { classpath 'org.akhikhl.gretty:gretty:+' }
 }
 // 构建全局变量
-ext {
-	VERSION = 1.0.0
-}
+ext { VERSION = 1.0 }
 // 全局项目设置
 allprojects {
-	apply plugin: 'java'
-	apply plugin: 'idea'
-	apply plugin: 'eclipse'
+    apply plugin: 'java'
+    apply plugin: 'idea'
+    apply plugin: 'eclipse'
 
-	version = VERSION
+    version = VERSION
 
-	sourceCompatibility = 1.6
-	targetCompatibility = 1.6
+    sourceCompatibility = 1.6
+    targetCompatibility = 1.6
 
-	repositories {
-		jcenter()
-		mavenCentral()
-	}
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
 }
 // 子项目设置
 subprojects {
-	apply plugin: 'war'
+    apply plugin: 'war'
 
-	// 我们使用slf4j&logback，移除commons-logging
-	configurations {
-		all*.exclude group: 'commons-logging', name: 'commons-logging'
-	}
+    // 我们使用slf4j&logback，移除commons-logging
+    configurations {
+        all*.exclude group: 'commons-logging', name: 'commons-logging'
+    }
 
-	dependencies {
-		compile "org.slf4j:slf4j-api:$slf4j"
+    dependencies {
+        compile "org.slf4j:slf4j-api:$slf4j"
 
-		providedCompile	"javax.servlet:javax.servlet-api:$servlet",
-			"javax.servlet.jsp:javax.servlet.jsp-api:$jsp",
-			"javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:$jstl"
+        providedCompile "javax.servlet:javax.servlet-api:$servlet",
+                "javax.servlet.jsp:javax.servlet.jsp-api:$jsp",
+                "javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:$jstl"
 
-		testCompile	"junit:junit:$junit",
-			"org.springframework:spring-test:$spring"
-	}
+        testCompile	"junit:junit:$junit",
+                "org.springframework:spring-test:$spring"
+    }
 }
 
 // 整个项目的核心配置，基本上包含了所有的依赖，以及spring（包括mvc）和mybatis的配置
-project(':core') {
+project(':system') {
 
-	dependencies {
-		compile project(':util')
-		compile "javax.inject:javax.inject:$javaxInject",
-			"org.springframework:spring-core:$spring",
-			"org.springframework:spring-beans:$spring",
-			"org.springframework:spring-context:$spring",
-			"org.springframework:spring-context-support:$spring",
-			"org.springframework:spring-jdbc:$spring",
-			"org.springframework:spring-tx:$spring",
-			"org.springframework:spring-web:$spring",
-			"org.springframework:spring-webmvc:$spring",
-			"org.freemarker:freemarker:$freemarker",
-			"com.fasterxml.jackson.core:jackson-core:$jackson2",
-			"com.fasterxml.jackson.core:jackson-databind:$jackson2",
-			"org.mybatis:mybatis:$mybatis",
-			"org.mybatis:mybatis-spring:$mybatisSpring",
-			"commons-dbcp:commons-dbcp:$dbcp",
-			"mysql:mysql-connector-java:$mysqlJdbc",
-			"org.slf4j:jcl-over-slf4j:$slf4j",
-			"ch.qos.logback:logback-classic:$logback"
-	}
+    dependencies {
+        compile project(':util')
+        compile "javax.inject:javax.inject:$javaxInject",
+                "org.springframework:spring-core:$spring",
+                "org.springframework:spring-beans:$spring",
+                "org.springframework:spring-context:$spring",
+                "org.springframework:spring-context-support:$spring",
+                "org.springframework:spring-jdbc:$spring",
+                "org.springframework:spring-tx:$spring",
+                "org.springframework:spring-web:$spring",
+                "org.springframework:spring-webmvc:$spring",
+                "org.freemarker:freemarker:$freemarker",
+                "com.fasterxml.jackson.core:jackson-core:$jackson2",
+                "com.fasterxml.jackson.core:jackson-databind:$jackson2",
+                "org.mybatis:mybatis:$mybatis",
+                "org.mybatis:mybatis-spring:$mybatisSpring",
+                "commons-dbcp:commons-dbcp:$dbcp",
+                "mysql:mysql-connector-java:$mysqlJdbc",
+                "org.slf4j:jcl-over-slf4j:$slf4j",
+                "ch.qos.logback:logback-classic:$logback"
+    }
 }
