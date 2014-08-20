@@ -2,15 +2,15 @@
 buildscript {
     repositories { jcenter() }
 
-    dependencies { classpath 'org.akhikhl.gretty:gretty:+' }
+    dependencies { classpath "org.akhikhl.gretty:gretty:+" }
 }
 // 构建全局变量
 ext { VERSION = 1.0 }
 // 全局项目设置
 allprojects {
-    apply plugin: 'java'
-    apply plugin: 'idea'
-    apply plugin: 'eclipse'
+    apply plugin: "java"
+    apply plugin: "idea"
+    apply plugin: "eclipse"
 
     version = VERSION
 
@@ -24,12 +24,12 @@ allprojects {
 }
 // 子项目设置
 subprojects {
-    apply plugin: 'war'
-    apply plugin: 'org.akhikhl.gretty'
+    apply plugin: "war"
+    apply plugin: "org.akhikhl.gretty"
 
     // 我们使用slf4j&logback，移除commons-logging
     configurations {
-        all*.exclude group: 'commons-logging', name: 'commons-logging'
+        all*.exclude group: "commons-logging", name: "commons-logging"
     }
 
     dependencies {
@@ -39,16 +39,18 @@ subprojects {
                 "javax.servlet.jsp:javax.servlet.jsp-api:$jsp",
                 "javax.servlet.jsp.jstl:javax.servlet.jsp.jstl-api:$jstl"
 
-        testCompile	"junit:junit:$junit",
+        testCompile "junit:junit:$junit",
                 "org.springframework:spring-test:$spring"
     }
+
+    tasks.withType(Compile) { options.encoding = "UTF-8" }
 }
 
 // 整个项目的核心配置，基本上包含了所有的依赖，以及spring（包括mvc）和mybatis的配置
-project(':system') {
+project(":system") {
 
     dependencies {
-        compile project(':util')
+        compile project(":util")
         compile "javax.inject:javax.inject:$javaxInject",
                 "org.springframework:spring-core:$spring",
                 "org.springframework:spring-beans:$spring",
