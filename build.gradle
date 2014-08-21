@@ -48,14 +48,13 @@ subprojects {
         testCompile "junit:junit:$junit",
                 "org.springframework:spring-test:$spring"
     }
-
 }
-
 // 整个项目的核心配置，基本上包含了所有的依赖，以及spring（包括mvc）和mybatis的配置
 project(":system") {
 
     dependencies {
         compile project(":util")
+        compile fileTree(dir: '../dependency', include: '*.jar')
         compile "javax.inject:javax.inject:$javaxInject",
                 "org.springframework:spring-core:$spring",
                 "org.springframework:spring-beans:$spring",
