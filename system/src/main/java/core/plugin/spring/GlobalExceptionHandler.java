@@ -23,7 +23,24 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
 
-import common.exception.http.*;
+import common.exception.http.BadRequestException;
+import common.exception.http.ConflictException;
+import common.exception.http.ExpectationFailedException;
+import common.exception.http.ForbiddenException;
+import common.exception.http.GoneException;
+import common.exception.http.LengthRequiredException;
+import common.exception.http.MethodNotAllowedException;
+import common.exception.http.NotAcceptableException;
+import common.exception.http.NotFoundException;
+import common.exception.http.PaymentRequiredException;
+import common.exception.http.PreconditionFailedException;
+import common.exception.http.ProxyAuthenticationRequiredException;
+import common.exception.http.RequestEntityTooLargeException;
+import common.exception.http.RequestTimeoutException;
+import common.exception.http.RequestURITooLongException;
+import common.exception.http.RequestedRangeNotSatisfiableException;
+import common.exception.http.UnauthorizedException;
+import common.exception.http.UnsupportedMediaTypeException;
 
 /**
  * 全局异常处理器
@@ -40,7 +57,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex,
             Object body, HttpHeaders headers, HttpStatus status,
             WebRequest request) {
-        l.error(ex.getClass().getSimpleName(), ex.getLocalizedMessage());
+        L.error(ex.getClass().getSimpleName(), ex.getLocalizedMessage());
         // no cache
         headers.add("Content-Type", "text/plain; charset=utf-8");
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
@@ -51,12 +68,12 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /**
-     * 400 默认的异常处理
+     * 500 默认的异常处理
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handException(Exception ex, WebRequest webRequest) {
         return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.BAD_REQUEST, webRequest);
+                new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, webRequest);
     }
 
     /**
@@ -233,6 +250,5 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                 new HttpHeaders(), HttpStatus.EXPECTATION_FAILED, webRequest);
     }
 
-    private static Logger l = LoggerFactory
-            .getLogger(GlobalExceptionHandler.class);
+    private static final Logger L = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 }

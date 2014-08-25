@@ -33,6 +33,32 @@ subprojects {
 
     gretty { host = "0.0.0.0" }
 
+    // ~~~~~~~ 代码质量检测 ~~~~~~~~~~~~~~
+    apply plugin: "jacoco"
+    apply plugin: "checkstyle"
+    apply plugin: "sonar-runner"
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    checkstyle{
+        configFile = file("../res/config/checkstyle/sun_check.xml")
+        sourceSets = [sourceSets.main]
+        ignoreFailures = true
+    }
+
+    sonarRunner {
+        sonarProperties {
+            property "sonar.host.url", "http://localhost:9000"
+            property "sonar.login", "admin"
+            property "sonar.password", "admin"
+            property "sonar.jdbc.url", "jdbc:h2:tcp://localhost:9092/sonar"
+            property "sonar.jdbc.driverClassName", "org.h2.Driver"
+            property "sonar.jdbc.username", "sonar"
+            property "sonar.jdbc.password", "sonar"
+            property "sonar.sourceEncoding", "UTF-8"
+            property "sonar.jacoco.reportPath", "${project.buildDir}/jacoco/test.exec"
+        }
+    }
+
     // 我们使用slf4j&logback，移除commons-logging
     configurations {
         all*.exclude group: "commons-logging", name: "commons-logging"

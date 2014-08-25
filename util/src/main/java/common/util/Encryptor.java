@@ -25,9 +25,14 @@ import java.security.NoSuchAlgorithmException;
  * @create 2014年8月20日
  * @version 1.0
  */
-public class Encryptor {
+public final class Encryptor {
 
-    public static final String MD5(String src) {
+    private static final int BYTE_H = 0XFF;
+
+    private Encryptor() {
+    }
+
+    public static String md5(String src) {
         MessageDigest md = null;
         try {
             md = MessageDigest.getInstance("MD5");
@@ -43,18 +48,18 @@ public class Encryptor {
         StringBuffer md5StrBuff = new StringBuffer();
 
         for (int i = 0; i < byteArray.length; i++) {
-            if (Integer.toHexString(0xFF & byteArray[i]).length() == 1) {
+            if (Integer.toHexString(BYTE_H & byteArray[i]).length() == 1) {
                 md5StrBuff.append("0").append(
-                        Integer.toHexString(0xFF & byteArray[i]));
+                        Integer.toHexString(BYTE_H & byteArray[i]));
             } else {
-                md5StrBuff.append(Integer.toHexString(0xFF & byteArray[i]));
+                md5StrBuff.append(Integer.toHexString(BYTE_H & byteArray[i]));
             }
         }
 
         return md5StrBuff.toString();
     }
 
-    public static final String sha1(String src) {
+    public static String sha1(String src) {
         MessageDigest md;
         try {
             md = MessageDigest.getInstance("SHA1");
@@ -65,7 +70,7 @@ public class Encryptor {
         byte[] result = md.digest(src.getBytes());
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < result.length; i++) {
-            sb.append(Integer.toString((result[i] & 0xff) + 0x100, 16)
+            sb.append(Integer.toString((result[i] & BYTE_H) + 0x100, 16)
                     .substring(1));
         }
 

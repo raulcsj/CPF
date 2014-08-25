@@ -16,6 +16,8 @@ package web;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import common.exception.http.NotFoundException;
+
 /**
  * @author CSJ
  * @email raulcsj@126.com
@@ -27,5 +29,10 @@ public class DefaultController {
     @RequestMapping(value = { "/", "/home.html" })
     public String home() {
         return "dashboard";
+    }
+
+    @RequestMapping("/404.html")
+    public void httpError404() {
+        throw new NotFoundException("请求未发现!");
     }
 }

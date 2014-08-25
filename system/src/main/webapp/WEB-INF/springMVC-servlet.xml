@@ -22,6 +22,7 @@
 
   <!-- MVC 设置 -->
   <context:component-scan base-package="web" />
+  <context:component-scan base-package="core.plugin.spring" />
   <mvc:annotation-driven enable-matrix-variables="true" />
   <mvc:resources mapping="*.ico" location="/" />
   <mvc:resources mapping="/resources/**" location="/, classpath:/JSLIB/" />
