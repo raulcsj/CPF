@@ -23,10 +23,11 @@
   <!-- MVC 设置 -->
   <context:component-scan base-package="web" />
   <context:component-scan base-package="core.plugin.spring" />
-  <mvc:annotation-driven enable-matrix-variables="true" />
-  <mvc:resources mapping="*.ico" location="/" />
-  <mvc:resources mapping="/resources/**" location="/, classpath:/JSLIB/" />
   <mvc:default-servlet-handler />
+  <mvc:annotation-driven enable-matrix-variables="true" />
+  <!-- mvc:resources mapping="*.ico" location="/" /-->
+  <!-- mvc:resources mapping="/resources/**" location="/resources/" /-->
+  <mvc:resources mapping="/jslib/**" location="classpath:/JSLIB/" cache-period="31556926" />
 
   <!-- MVC 请求操作设置 -->
   <bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">

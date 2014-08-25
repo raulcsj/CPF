@@ -10,7 +10,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>${title}</title>
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
-<link rel="stylesheet" type="text/css" href="resources/dhtmlx/dhtmlx.css"/>
+<link rel="stylesheet" type="text/css" href="jslib/dhtmlx/dhtmlx.css"/>
 <jsp:invoke fragment="style"></jsp:invoke>
 </head>
 <body>
@@ -18,8 +18,8 @@
   <jsp:doBody />
   <jsp:invoke fragment="footer" />
 </body>
-<script src="resources/dojo/dojo.js"></script>
-<script src="resources/jquery/jquery-latest.js"></script>
-<script src="resources/dhtmlx/dhtmlx.js"></script>
+<script src="jslib/dojo/dojo.js"></script>
+<script src="jslib/jquery/jquery-latest.js"></script>
+<script src="jslib/dhtmlx/dhtmlx.js"></script>
 <jsp:invoke fragment="script" />
 </html>

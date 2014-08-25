@@ -52,7 +52,7 @@
     <servlet-name>springMVC</servlet-name>
   </filter-mapping>
 
-  <!-- Spring MVC intercept -->
+  <!-- Spring MVC 拦截 -->
   <servlet>
     <servlet-name>springMVC</servlet-name>
     <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
@@ -61,6 +61,12 @@
   <servlet-mapping>
     <servlet-name>springMVC</servlet-name>
     <url-pattern>/</url-pattern>
+  </servlet-mapping>
+
+  <!-- 静态资源处理 -->
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>/resources/*</url-pattern>
   </servlet-mapping>
 
   <error-page>

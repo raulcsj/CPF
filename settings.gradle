@@ -1,1 +1,1 @@
-include ':util', ':system'
+include 'util', 'system'

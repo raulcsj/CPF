@@ -1,0 +1,35 @@
+{items: [
+    {id: "block_user", type: "block", text: "管理员", list: [
+        {id: "user_open", type: "buttonSelect", text: "欢迎", isbig: true, img: "48/user.png", items:[
+            {id: "btn_user_update", text: "修改资料", img: "16/user_profile.png", hotkey: "Ctrl+O"},
+            {id: "open_recent", text: "Recent", img: "18/copy.gif", items: [
+                { id: "recent_1", text: "dhtmlxvault 2.0.docx", img: "18/new.gif"},
+                { id: "recent_2", text: "sZ77X-UD3H(Rev1.0).png", img: "18/new.gif"},
+                { id: "recent_3", text: "IMG_14012014_154856.png", img: "18/new.gif"},
+                { id: "recent_4", text: "flac-1.2.1b.exe", img: "18/new.gif"},
+                { id: "recent_5", text: "FileZilla 3.5.3 win32 Setup.exe", img: "18/new.gif"},
+                { id: "recent_6", text: "Learning DHTMLX Suite UI [eBook].pdf", img: "18/new.gif"},
+                { id: "recent_7", text: "apache-httpd-2.2.14-ssh.rar", img: "18/new.gif"}
+            ]}
+        ]},
+        {id: "btn_user_pwd", type: "button", text: "修改密码", img: "16/password.png"},
+        {id: "btn_user_exit", type: "button", text: "退出系统", img: "16/exit.png"}
+    ]},
+    {id: "block_auth", type: "block", text: "权限管理", list: [
+        {id: "user_open", type: "buttonSelect", text: "授权", isbig: true, img: "48/key.png", items:[
+            {id: "btn_auth_group", text: "机构维护", img: "16/orga.png"},
+            {id: "btn_auth_user", text: "用户维护", img: "16/user_profile.png"},
+            {id: "btn_auth_role", text: "角色维护", img: "16/role.png"},
+            {id: "btn_auth_permit", text: "授权维护", img: "16/key.png"}
+        ]},
+        {id: "btn_auth_wizard", type: "button", text: "一键授权", img: "16/nav.png"}
+    ]},
+    {id: "block_sysConf", type: "block", text: "系统管理", list: [
+        {id: "btn_sys_restart", type: "button", text: "重启服务", img: "16/restart.png"},
+        {id: "btn_sys_shutdown", type: "button", text: "关闭服务", img: "16/shutdown.png"},
+        {id: "btn_sys", type: "buttonSelect", text: "系统", isbig: true, img: "48/system.png", items:[
+            {id: "btn_sys_monitor", text: "运行状态", img: "16/monitor.png"},
+            {id: "btn_sys_log", text: "操作日志", img: "16/sys_operLog.png"}
+        ]}
+    ]}
+]}
