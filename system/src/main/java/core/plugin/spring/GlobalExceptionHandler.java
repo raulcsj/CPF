@@ -43,28 +43,26 @@ import common.exception.http.UnauthorizedException;
 import common.exception.http.UnsupportedMediaTypeException;
 
 /**
+ * <p>
  * 全局异常处理器
+ * </p>
  * 
- * @author CSJ
- * @email raulcsj@126.com
- * @create 2014年8月20日
+ * @author CSJ (raulcsj@126.com)
  * @version 1.0
  */
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex,
-            Object body, HttpHeaders headers, HttpStatus status,
-            WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers,
+            HttpStatus status, WebRequest request) {
         L.error(ex.getClass().getSimpleName(), ex.getLocalizedMessage());
         // no cache
         headers.add("Content-Type", "text/plain; charset=utf-8");
         headers.add("Cache-Control", "no-cache, no-store, must-revalidate");
         headers.add("Pragma", "no-cache");
         headers.add("Expires", "0");
-        return super.handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                headers, status, request);
+        return super.handleExceptionInternal(ex, ex.getLocalizedMessage(), headers, status, request);
     }
 
     /**
@@ -72,8 +70,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(Exception.class)
     public ResponseEntity<?> handException(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.INTERNAL_SERVER_ERROR, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(),
+                HttpStatus.INTERNAL_SERVER_ERROR, webRequest);
     }
 
     /**
@@ -81,8 +79,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(BadRequestException.class)
     public ResponseEntity<?> badRequest(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.BAD_REQUEST, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.BAD_REQUEST,
+                webRequest);
     }
 
     /**
@@ -90,8 +88,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<?> unauthorized(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.UNAUTHORIZED, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.UNAUTHORIZED,
+                webRequest);
     }
 
     /**
@@ -99,8 +97,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(PaymentRequiredException.class)
     public ResponseEntity<?> paymentRequired(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.PAYMENT_REQUIRED, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.PAYMENT_REQUIRED,
+                webRequest);
     }
 
     /**
@@ -108,8 +106,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(ForbiddenException.class)
     public ResponseEntity<?> forbidden(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.FORBIDDEN, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.FORBIDDEN,
+                webRequest);
     }
 
     /**
@@ -117,18 +115,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<?> notFound(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.NOT_FOUND, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.NOT_FOUND,
+                webRequest);
     }
 
     /**
      * 405 Method Not Allowed.
      */
     @ExceptionHandler(MethodNotAllowedException.class)
-    public ResponseEntity<?> methodNotAllowed(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED, webRequest);
+    public ResponseEntity<?> methodNotAllowed(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.METHOD_NOT_ALLOWED,
+                webRequest);
     }
 
     /**
@@ -136,19 +133,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(NotAcceptableException.class)
     public ResponseEntity<?> notAcceptable(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.NOT_ACCEPTABLE,
+                webRequest);
     }
 
     /**
      * 407 Proxy Authentication Required.
      */
     @ExceptionHandler(ProxyAuthenticationRequiredException.class)
-    public ResponseEntity<?> proxyAuthenticationRequired(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.PROXY_AUTHENTICATION_REQUIRED,
-                webRequest);
+    public ResponseEntity<?> proxyAuthenticationRequired(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(),
+                HttpStatus.PROXY_AUTHENTICATION_REQUIRED, webRequest);
     }
 
     /**
@@ -156,8 +151,8 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(RequestTimeoutException.class)
     public ResponseEntity<?> requestTimeout(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.REQUEST_TIMEOUT, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.REQUEST_TIMEOUT,
+                webRequest);
     }
 
     /**
@@ -165,8 +160,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(ConflictException.class)
     public ResponseEntity<?> conflict(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.CONFLICT, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.CONFLICT, webRequest);
     }
 
     /**
@@ -174,8 +168,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(GoneException.class)
     public ResponseEntity<?> gone(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.GONE, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.GONE, webRequest);
     }
 
     /**
@@ -183,71 +176,62 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
      */
     @ExceptionHandler(LengthRequiredException.class)
     public ResponseEntity<?> lengthRequired(Exception ex, WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.LENGTH_REQUIRED, webRequest);
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.LENGTH_REQUIRED,
+                webRequest);
     }
 
     /**
      * 412 Precondition Failed.
      */
     @ExceptionHandler(PreconditionFailedException.class)
-    public ResponseEntity<?> preconditionFail(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.PRECONDITION_FAILED, webRequest);
+    public ResponseEntity<?> preconditionFail(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.PRECONDITION_FAILED,
+                webRequest);
     }
 
     /**
      * 413 Request Entity Too Large.
      */
     @ExceptionHandler(RequestEntityTooLargeException.class)
-    public ResponseEntity<?> requestEntityTooLarge(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.REQUEST_ENTITY_TOO_LARGE,
-                webRequest);
+    public ResponseEntity<?> requestEntityTooLarge(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(),
+                HttpStatus.REQUEST_ENTITY_TOO_LARGE, webRequest);
     }
 
     /**
      * 414 Request URI Too Long.
      */
     @ExceptionHandler(RequestURITooLongException.class)
-    public ResponseEntity<?> requestURITooLong(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.REQUEST_URI_TOO_LONG, webRequest);
+    public ResponseEntity<?> requestURITooLong(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(),
+                HttpStatus.REQUEST_URI_TOO_LONG, webRequest);
     }
 
     /**
      * 415 Unsupported Media Type.
      */
     @ExceptionHandler(UnsupportedMediaTypeException.class)
-    public ResponseEntity<?> unsupportedMediaType(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.UNSUPPORTED_MEDIA_TYPE,
-                webRequest);
+    public ResponseEntity<?> unsupportedMediaType(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(),
+                HttpStatus.UNSUPPORTED_MEDIA_TYPE, webRequest);
     }
 
     /**
      * 416 Requested Range Not Satisfiable.
      */
     @ExceptionHandler(RequestedRangeNotSatisfiableException.class)
-    public ResponseEntity<?> requestedRangeNotSatisfiable(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE,
-                webRequest);
+    public ResponseEntity<?> requestedRangeNotSatisfiable(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(),
+                HttpStatus.REQUESTED_RANGE_NOT_SATISFIABLE, webRequest);
     }
 
     /**
      * 417 Expectation Failed.
      */
     @ExceptionHandler(ExpectationFailedException.class)
-    public ResponseEntity<?> expectationFailed(Exception ex,
-            WebRequest webRequest) {
-        return handleExceptionInternal(ex, ex.getLocalizedMessage(),
-                new HttpHeaders(), HttpStatus.EXPECTATION_FAILED, webRequest);
+    public ResponseEntity<?> expectationFailed(Exception ex, WebRequest webRequest) {
+        return handleExceptionInternal(ex, ex.getLocalizedMessage(), new HttpHeaders(), HttpStatus.EXPECTATION_FAILED,
+                webRequest);
     }
 
     private static final Logger L = LoggerFactory.getLogger(GlobalExceptionHandler.class);

@@ -24,9 +24,7 @@ import common.exception.app.AppRuntimeException;
  * 密码加密工具。
  * </p>
  * 
- * @author CSJ
- * @email raulcsj@126.com
- * @create 2014年8月20日
+ * @author CSJ (raulcsj@126.com)
  * @version 1.0
  */
 public final class EncryptorUtil {
@@ -63,8 +61,7 @@ public final class EncryptorUtil {
 
         for (int i = 0; i < byteArray.length; i++) {
             if (Integer.toHexString(BYTE_MAX & byteArray[i]).length() == 1) {
-                md5StrBuff.append("0").append(
-                        Integer.toHexString(BYTE_MAX & byteArray[i]));
+                md5StrBuff.append("0").append(Integer.toHexString(BYTE_MAX & byteArray[i]));
             } else {
                 md5StrBuff.append(Integer.toHexString(BYTE_MAX & byteArray[i]));
             }
@@ -91,9 +88,7 @@ public final class EncryptorUtil {
         byte[] result = md.digest(src.getBytes());
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < result.length; i++) {
-            sb.append(Integer
-                    .toString((result[i] & BYTE_MAX) + 0x100, RADIX_16)
-                    .substring(1));
+            sb.append(Integer.toString((result[i] & BYTE_MAX) + 0x100, RADIX_16).substring(1));
         }
 
         return sb.toString();
@@ -133,8 +128,7 @@ public final class EncryptorUtil {
             char[] hexChars = hexStr.toCharArray();
             byte[] orgin = new byte[hexChars.length / 2];
             for (int i = 0; i < orgin.length; i++) {
-                int b = (HEX_SEQ.indexOf(hexChars[2 * i]) << 4 | HEX_SEQ
-                        .indexOf(hexChars[2 * i + 1]));
+                int b = (HEX_SEQ.indexOf(hexChars[2 * i]) << 4 | HEX_SEQ.indexOf(hexChars[2 * i + 1]));
                 orgin[i] = (byte) (b & BYTE_MAX);
             }
             res = new String(orgin);

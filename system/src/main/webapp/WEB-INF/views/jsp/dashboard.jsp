@@ -62,8 +62,9 @@
                             {type: "button", name: "submit", value: "确定", offsetLeft: 85}
                         ]);
                         myForm.attachEvent("onButtonClick", function(btnId){
-                            console.log(btnId);
-                            console.log(myForm.getFormData());
+                            if(btnId == "submit") {
+                                syncDB(ctx + "/submit.html", myForm.getFormData());
+                            }
                             myPop.hide();
                         });
                     }

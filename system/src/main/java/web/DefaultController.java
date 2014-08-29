@@ -13,15 +13,23 @@
  ************************************************************************/
 package web;
 
+import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import common.exception.http.NotFoundException;
 
 /**
- * @author CSJ
- * @email raulcsj@126.com
- * @create 2014年8月21日
+ * <p>
+ * 默认Request请求处理
+ * </p>
+ * 
+ * @author CSJ (raulcsj@126.com)
  * @version 1.0
  */
 @Controller
@@ -35,4 +43,12 @@ public class DefaultController {
     public void httpError404() {
         throw new NotFoundException("请求未发现!");
     }
+
+    @RequestMapping("/submit.html")
+    @ResponseBody
+    public void submit(@RequestBody Map<String, String> map) {
+        L.info(map.toString());
+    }
+
+    private static final Logger L = LoggerFactory.getLogger(DefaultController.class);
 }
