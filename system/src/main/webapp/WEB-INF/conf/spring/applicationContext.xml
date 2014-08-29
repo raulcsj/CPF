@@ -20,8 +20,22 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
+  <context:property-placeholder location="classpath:application.properties" ignore-unresolvable="true" />
   <!-- *********************************** DB CONNECTION SETTING pool:start ************************************** -->
-
+  <!-- BoneCP configuration -->
+  <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
+    <property name="driverClass" value="${bonecp.driverClass}" />
+    <property name="jdbcUrl" value="${bonecp.url}" />
+    <property name="username" value="${bonecp.username}" />
+    <property name="password" value="${bonecp.password}" />
+    <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idleConnectionTestPeriodInMinutes}" />
+    <property name="idleMaxAgeInMinutes" value="${bonecp.idleMaxAgeInMinutes}" />
+    <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}" />
+    <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}" />
+    <property name="partitionCount" value="${bonecp.partitionCount}" />
+    <property name="acquireIncrement" value="${bonecp.acquireIncrement}" />
+    <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}" />
+  </bean>
   <!-- *********************************** DB CONNECTION SETTING pool:end **************************************** -->
 
   <!-- *********************************** CACHE SETTING encache:begin ******************************************* -->

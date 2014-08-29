@@ -94,8 +94,8 @@ project(":system") {
                 "com.fasterxml.jackson.core:jackson-databind:$jackson2",
                 "org.mybatis:mybatis:$mybatis",
                 "org.mybatis:mybatis-spring:$mybatisSpring",
-                "commons-dbcp:commons-dbcp:$dbcp",
-                "mysql:mysql-connector-java:$mysqlJdbc",
+                "com.jolbox:bonecp:$bonecp",
+                "com.h2database:h2:$h2",
                 "org.slf4j:jcl-over-slf4j:$slf4j",
                 "ch.qos.logback:logback-classic:$logback"
     }
