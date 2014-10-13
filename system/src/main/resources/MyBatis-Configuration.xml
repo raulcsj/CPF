@@ -22,6 +22,8 @@
     <setting name="defaultExecutorType" value="SIMPLE" />
     <!-- 设置超时时间，它决定驱动等待一个数据库响应的时间 -->
     <setting name="defaultStatementTimeout" value="25000" />
+    <!-- 设置当属性为空值异常UncategorizedSQLException: Error setting null for parameter -->
+    <setting name="jdbcTypeForNull" value="NULL" />
   </settings>
 
   <databaseIdProvider type="DB_VENDOR">
