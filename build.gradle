@@ -30,6 +30,7 @@ allprojects {
 subprojects {
     apply plugin: "war"
     apply plugin: "org.akhikhl.gretty"
+    //apply from: "../res/plugin/gretty.plugin"
 
     gretty { host = "0.0.0.0" }
 
@@ -81,6 +82,10 @@ project(":system") {
         compile project(":util")
         compile fileTree(dir: "../dependency", include: "*.jar")
         compile "javax.inject:javax.inject:$javaxInject",
+                "cglib:cglib:$cglib",
+                "org.apache.commons:commons-lang3:$commonLang",
+                "org.springframework:spring-aop:$spring",
+                "org.springframework:spring-aspects:$spring",
                 "org.springframework:spring-core:$spring",
                 "org.springframework:spring-beans:$spring",
                 "org.springframework:spring-context:$spring",

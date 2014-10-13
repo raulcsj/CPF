@@ -20,36 +20,46 @@
        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
 
-  <context:property-placeholder location="classpath:application.properties"
-    ignore-unresolvable="true" />
-  <bean id="createWebServer" class="org.h2.tools.Server" factory-method="createWebServer" init-method="start"
-    destroy-method="stop">
-    <constructor-arg value="-webAllowOthers" />
+  <!-- MyBatis Configure -->
+  <bean name="paginationInterceptor" class="core.plugin.mybatis.PageInterceptor" />
+  <bean name="executeSqlLogInterceptor" class="core.plugin.mybatis.ExecuteSqlLogInterceptor" />
+  <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+    <property name="dataSource" ref="dataSource" />
+    <property name="plugins">
+      <list>
+        <ref bean="paginationInterceptor" />
+        <ref bean="executeSqlLogInterceptor" />
+      </list>
+    </property>
+    <property name="configLocation" value="classpath:MyBatis-Configuration.xml" />
+    <property name="mapperLocations" value="classpath:mappers/**/*.xml" />
+    <property name="typeAliasesPackage" value="model" />
   </bean>
-  <bean id="createTcpServer" class="org.h2.tools.Server" factory-method="createTcpServer" init-method="start"
-    destroy-method="stop">
-    <constructor-arg value="-tcpAllowOthers" />
+  <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+    <property name="basePackage" value="dao.mapper" />
+    <property name="markerInterface" value="dao.BaseMapper" />
+    <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory" />
   </bean>
-  <!-- *********************************** DB CONNECTION SETTING pool:start ************************************** -->
-  <!-- BoneCP configuration -->
-  <bean id="dataSource" class="com.jolbox.bonecp.BoneCPDataSource" destroy-method="close">
-    <property name="driverClass" value="${bonecp.driverClass}" />
-    <property name="jdbcUrl" value="${bonecp.url}" />
-    <property name="username" value="${bonecp.username}" />
-    <property name="password" value="${bonecp.password}" />
-    <property name="idleConnectionTestPeriodInMinutes" value="${bonecp.idleConnectionTestPeriodInMinutes}" />
-    <property name="idleMaxAgeInMinutes" value="${bonecp.idleMaxAgeInMinutes}" />
-    <property name="maxConnectionsPerPartition" value="${bonecp.maxConnectionsPerPartition}" />
-    <property name="minConnectionsPerPartition" value="${bonecp.minConnectionsPerPartition}" />
-    <property name="partitionCount" value="${bonecp.partitionCount}" />
-    <property name="acquireIncrement" value="${bonecp.acquireIncrement}" />
-    <property name="statementsCacheSize" value="${bonecp.statementsCacheSize}" />
+  <bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate">
+    <constructor-arg index="0" ref="sqlSessionFactory" />
+    <constructor-arg index="1" value="BATCH" />
   </bean>
-  <!-- *********************************** DB CONNECTION SETTING pool:end **************************************** -->
-
-  <!-- *********************************** CACHE SETTING encache:begin ******************************************* -->
-  <!-- Encache setting -->
-
-  <!-- *********************************** CACHE SETTING encache:end ********************************************* -->
-  <import resource="../module/applicationContext-dao.xml"/>
+  <!-- Transaction advice -->
+  <bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+    <property name="dataSource" ref="dataSource" />
+  </bean>
+  <tx:annotation-driven />
+  <tx:advice id="txAdvice" transaction-manager="txManager">
+    <tx:attributes>
+      <!-- all methods starting with 'query' are read-only -->
+      <tx:method name="query*" read-only="true" />
+      <!-- other methods use the default transaction settings -->
+      <tx:method name="*" propagation="REQUIRED" rollback-for="Throwable" />
+    </tx:attributes>
+  </tx:advice>
+  <!-- Ensure that the above transaction advice runs for any execution -->
+  <aop:config>
+    <aop:pointcut id="serviceOperation" expression="execution(* service..*Service.*(..))" />
+    <aop:advisor pointcut-ref="serviceOperation" advice-ref="txAdvice" />
+  </aop:config>
 </beans>

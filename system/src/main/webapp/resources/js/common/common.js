@@ -213,7 +213,7 @@ require([
    /********************************************************************************
     * Ajax submit to sync database.
     ********************************************************************************/
-   syncDB = function(url, postData) {
+   syncDB = function(url, postData, callback) {
        request.post(url, {
            headers : { "Content-Type": "application/json; charset=utf-8" },
            data : JSON.stringify(postData.data || postData),
