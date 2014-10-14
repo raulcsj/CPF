@@ -65,7 +65,8 @@ subprojects {
     }
 
     dependencies {
-        compile "org.slf4j:slf4j-api:$slf4j"
+        compile "org.slf4j:slf4j-api:$slf4j",
+                "org.apache.commons:commons-lang3:$commonLang"
 
         providedCompile "javax.servlet:javax.servlet-api:$servlet",
                 "javax.servlet.jsp:javax.servlet.jsp-api:$jsp",
@@ -80,10 +81,10 @@ project(":system") {
 
     dependencies {
         compile project(":util")
+        compile project(":plugin")
         compile fileTree(dir: "../dependency", include: "*.jar")
         compile "javax.inject:javax.inject:$javaxInject",
                 "cglib:cglib:$cglib",
-                "org.apache.commons:commons-lang3:$commonLang",
                 "org.springframework:spring-aop:$spring",
                 "org.springframework:spring-aspects:$spring",
                 "org.springframework:spring-core:$spring",
@@ -103,6 +104,17 @@ project(":system") {
                 "com.h2database:h2:$h2",
                 "org.slf4j:jcl-over-slf4j:$slf4j",
                 "ch.qos.logback:logback-classic:$logback"
+    }
+
+}
+
+project(":plugin") {
+
+    dependencies {
+        compile project(":util")
+        compile "org.springframework:spring-web:$spring",
+                "org.springframework:spring-webmvc:$spring",
+                "org.mybatis:mybatis:$mybatis"
     }
 
 }
