@@ -61,7 +61,7 @@ subprojects {
 
     // 我们使用slf4j&logback，移除commons-logging
     configurations {
-        all*.exclude group: "commons-logging", name: "commons-logging"
+        all*.exclude group: "commons-logging", module: "commons-logging"
     }
 
     dependencies {
